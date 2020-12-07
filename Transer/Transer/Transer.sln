@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transer", "Transer\Transer.csproj", "{832ABB58-7A85-4A36-91AC-F797FA36BD1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{832ABB58-7A85-4A36-91AC-F797FA36BD1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832ABB58-7A85-4A36-91AC-F797FA36BD1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832ABB58-7A85-4A36-91AC-F797FA36BD1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832ABB58-7A85-4A36-91AC-F797FA36BD1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A8DDEDC7-220E-42F2-9D81-60FFCE66F906}
+	EndGlobalSection
+EndGlobal
