@@ -19,6 +19,7 @@ namespace Transer
         }
         List<string> ReadFile;
         Dictionary<string,List< List<string>>> TDATA;
+        OpenFileDialog ofd = new OpenFileDialog();
         string TBOX1S = "";
 
         List<string> CSVLSpliter(string s)
@@ -73,11 +74,13 @@ namespace Transer
             return SA;
         }
         
-        private void Transer()
+        private void Transer(BackgroundWorker worker,EventArgs e)
         {
+            int RPG = 0;
             TBOX1S = "";
             TDATA = new Dictionary<string, List< List<string>>>();
             ReadFile.RemoveAt(0);
+            
             foreach (string Line in ReadFile)
             {
                 List<string> SPLine =CSVLSpliter(Line);
@@ -94,20 +97,21 @@ namespace Transer
 
                 }
                 for (int i = 0; i < 24; i++)/*if(SPLine[6 + i]!="nan")*/ TDATA[SPLine[5]][i][Convert.ToInt32(SPLine[2]) - 1] = SPLine[6 + i];
+                backgroundWorker1.ReportProgress(++RPG);
             }
-
-            foreach (string K in TDATA.Keys)
+            TBOX1S += "測站,日期,時間,\"類別(ppbC)\",\"Ethane(ppbC)\",\"Ethylene(ppbC)\",\"Propane(ppbC)\",\"Propylene(ppbC)\",\"Isobutane(ppbC)\",\"n-Butane(ppbC)\",\"Acetylene(ppbC)\",\"t-2-Butene(ppbC)\",\"1-Butene(ppbC)\",\"cis-2-Butene(ppbC)\",\"Cyclopentane(ppbC)\",\"Isopentane(ppbC)\",\"n-Pentane(ppbC)\",\"t-2-Pentene(ppbC)\",\"1-Pentene(ppbC)\",\"cis-2-Pentene(ppbC)\",\"2,2-Dimethylbutane(ppbC)\",\"2,3-Dimethylbutane(ppbC)\",\"2-Methylpentane(ppbC)\",\"3-Methylpentane(ppbC)\",\"Isoprene(ppbC)\",\"1-Hexene(ppbC)\",\"n-Hexane(ppbC)\",\"Methylcyclopentane(ppbC)\",\"2,4-Dimethylpentane(ppbC)\",\"Benzene(ppbC)\",\"Cyclohexane(ppbC)\",\"2-Methylhexane(ppbC)\",\"2,3-Dimethylpentane(ppbC)\",\"3-Methylhexane(ppbC)\",\"2,2,4-Trimethylpentane(ppbC)\",\"n-Heptane(ppbC)\",\"Methylcyclohexane(ppbC)\",\"2,3,4-Trimethylpentane(ppbC)\",\"Toluene(ppbC)\",\"2-Methylheptane(ppbC)\",\"3-Methylheptane(ppbC)\",\"n-Octane(ppbC)\",\"Ethylbenzene(ppbC)\",\"m,p-Xylene(ppbC)\",\"Styrene(ppbC)\",\"o-Xylene(ppbC)\",\"n-Nonane(ppbC)\",\"Isopropylbenzene(ppbC)\",\"n-Propylbenzene(ppbC)\",\"m-Ethyltoluene(ppbC)\",\"p-Ethyltoluene(ppbC)\",\"1,3,5-Trimethylbenzene(ppbC)\",\"o-Ethyltoluene(ppbC)\",\"1,2,4-Trimethylbenzene(ppbC)\",\"n-Decane(ppbC)\",\"1,2,3-Trimethylbenzene(ppbC)\",\"m-Diethylbenzene(ppbC)\",\"p-Diethylbenzene(ppbC)\",\"n-Undecane(ppbC)\",\"n-Dodecane(ppbC)\"\n";
+            foreach (string Time in TDATA.Keys)
             {
+                
                 for (int i = 0; i < 24; i++)
                 {
-                    TBOX1S += K + "," + i.ToString();
-                    for (int o = 0; o < 56; o++) TBOX1S += "," + TDATA[K][i][o];
+                    TBOX1S += "臺西" + ",";
+                    TBOX1S += Time + "," + i.ToString()+",QA後";
+                    for (int o = 0; o < 56; o++) TBOX1S += "," + TDATA[Time][i][o];
                     TBOX1S += "\n";
                 }
-
-
             }
-
+            backgroundWorker1.ReportProgress(++RPG);
 
         }
 
@@ -116,7 +120,7 @@ namespace Transer
         private void button1_Click(object sender, EventArgs e)
         {
 
-            OpenFileDialog ofd = new OpenFileDialog();
+            
             ofd.Title = "選擇CSV檔案";
             ofd.Filter = "CSV Files (.csv)|*.csv|All Files(*.*)|*.*";
             ofd.FilterIndex = 1;
@@ -127,7 +131,10 @@ namespace Transer
                 string filename = ofd.FileName;
                 Encoding ec = Encoding.GetEncoding("big5");
                 ReadFile = File.ReadAllLines(filename, ec).ToList<string>();
-                Transer();
+                progressBar1.Maximum = ReadFile.Count();
+                progressBar1.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+                
                
                 
 
@@ -144,10 +151,10 @@ namespace Transer
             if (COFD.ShowDialog() == CommonFileDialogResult.Ok)
             {
                FileStream FS= File.Create(COFD.FileName + @"\TEST1.csv");
-                StreamWriter SW = new StreamWriter(FS);
+                StreamWriter SW = new StreamWriter(FS,  Encoding.GetEncoding("big5"));
                 SW.Write(TBOX1S);
                 SW.Close();
-
+                MessageBox.Show("輸出已完成", "Transer");
             }
 
 
@@ -156,6 +163,22 @@ namespace Transer
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker BW = (BackgroundWorker)sender;
+            Transer(BW, e);
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show("轉換完成，已可輸出", "Transer");
         }
     }
 }
