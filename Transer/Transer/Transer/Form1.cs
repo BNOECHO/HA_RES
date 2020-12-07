@@ -19,7 +19,7 @@ namespace Transer
         }
         List<string> ReadFile;
         Dictionary<string,List< List<string>>> TDATA;
-        OpenFileDialog ofd = new OpenFileDialog();
+
         string TBOX1S = "";
 
         List<string> CSVLSpliter(string s)
@@ -119,8 +119,8 @@ namespace Transer
 
         private void button1_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
 
-            
             ofd.Title = "選擇CSV檔案";
             ofd.Filter = "CSV Files (.csv)|*.csv|All Files(*.*)|*.*";
             ofd.FilterIndex = 1;
