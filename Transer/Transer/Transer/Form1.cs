@@ -18,7 +18,7 @@ namespace Transer
             InitializeComponent();
         }
         List<string> ReadFile;
-        Dictionary<string,List< List<string>>> TDATA;
+        SortedDictionary<string,List< List<string>>> TDATA;
 
         string TBOX1S = "";
 
@@ -78,7 +78,7 @@ namespace Transer
         {
             int RPG = 0;
             TBOX1S = "";
-            TDATA = new Dictionary<string, List< List<string>>>();
+            TDATA = new SortedDictionary<string, List< List<string>>>();
             ReadFile.RemoveAt(0);
             
             foreach (string Line in ReadFile)
