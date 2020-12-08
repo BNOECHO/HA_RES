@@ -84,7 +84,8 @@ namespace Transer
             foreach (string Line in ReadFile)
             {
                 List<string> SPLine =CSVLSpliter(Line);
-                if (!TDATA.Keys.Contains(SPLine[5]))//如果沒有該日期資料
+                string Date = SPLine[5].Replace('-', '/');
+                if (!TDATA.Keys.Contains(Date))//如果沒有該日期資料
                 {
                     
                     List<List<string>> L = new List<List<string>>();
@@ -93,10 +94,10 @@ namespace Transer
                         L.Add(new List<string>());
                         for (int o = 0; o < 56; o++) L[i].Add("");
                     }
-                    TDATA.Add(SPLine[5], L);
+                    TDATA.Add(Date, L);
 
                 }
-                for (int i = 0; i < 24; i++)/*if(SPLine[6 + i]!="nan")*/ TDATA[SPLine[5]][i][Convert.ToInt32(SPLine[2]) - 1] = SPLine[6 + i];
+                for (int i = 0; i < 24; i++)if(SPLine[6 + i]!="nan") TDATA[Date][i][Convert.ToInt32(SPLine[2]) - 1] = SPLine[6 + i];
                 backgroundWorker1.ReportProgress(++RPG);
             }
             TBOX1S += "測站,日期,時間,\"類別(ppbC)\",\"Ethane(ppbC)\",\"Ethylene(ppbC)\",\"Propane(ppbC)\",\"Propylene(ppbC)\",\"Isobutane(ppbC)\",\"n-Butane(ppbC)\",\"Acetylene(ppbC)\",\"t-2-Butene(ppbC)\",\"1-Butene(ppbC)\",\"cis-2-Butene(ppbC)\",\"Cyclopentane(ppbC)\",\"Isopentane(ppbC)\",\"n-Pentane(ppbC)\",\"t-2-Pentene(ppbC)\",\"1-Pentene(ppbC)\",\"cis-2-Pentene(ppbC)\",\"2,2-Dimethylbutane(ppbC)\",\"2,3-Dimethylbutane(ppbC)\",\"2-Methylpentane(ppbC)\",\"3-Methylpentane(ppbC)\",\"Isoprene(ppbC)\",\"1-Hexene(ppbC)\",\"n-Hexane(ppbC)\",\"Methylcyclopentane(ppbC)\",\"2,4-Dimethylpentane(ppbC)\",\"Benzene(ppbC)\",\"Cyclohexane(ppbC)\",\"2-Methylhexane(ppbC)\",\"2,3-Dimethylpentane(ppbC)\",\"3-Methylhexane(ppbC)\",\"2,2,4-Trimethylpentane(ppbC)\",\"n-Heptane(ppbC)\",\"Methylcyclohexane(ppbC)\",\"2,3,4-Trimethylpentane(ppbC)\",\"Toluene(ppbC)\",\"2-Methylheptane(ppbC)\",\"3-Methylheptane(ppbC)\",\"n-Octane(ppbC)\",\"Ethylbenzene(ppbC)\",\"m,p-Xylene(ppbC)\",\"Styrene(ppbC)\",\"o-Xylene(ppbC)\",\"n-Nonane(ppbC)\",\"Isopropylbenzene(ppbC)\",\"n-Propylbenzene(ppbC)\",\"m-Ethyltoluene(ppbC)\",\"p-Ethyltoluene(ppbC)\",\"1,3,5-Trimethylbenzene(ppbC)\",\"o-Ethyltoluene(ppbC)\",\"1,2,4-Trimethylbenzene(ppbC)\",\"n-Decane(ppbC)\",\"1,2,3-Trimethylbenzene(ppbC)\",\"m-Diethylbenzene(ppbC)\",\"p-Diethylbenzene(ppbC)\",\"n-Undecane(ppbC)\",\"n-Dodecane(ppbC)\"\n";
