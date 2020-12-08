@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 namespace Transer
 {
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -18,7 +19,7 @@ namespace Transer
             InitializeComponent();
         }
         List<string> ReadFile;
-        SortedDictionary<string,List< List<string>>> TDATA;
+        Dictionary<string,SortedDictionary<string, List<List<string>>>> TDATA;
 
         string TBOX1S = "";
 
@@ -78,14 +79,18 @@ namespace Transer
         {
             int RPG = 0;
             TBOX1S = "";
-            TDATA = new SortedDictionary<string, List< List<string>>>();
+            TDATA = new Dictionary<string,SortedDictionary<string, List< List<string>>>>();
             ReadFile.RemoveAt(0);
             
             foreach (string Line in ReadFile)
             {
                 List<string> SPLine =CSVLSpliter(Line);
                 string Date = SPLine[5].Replace('-', '/');
-                if (!TDATA.Keys.Contains(Date))//如果沒有該日期資料
+                if (!TDATA.Keys.Contains(SPLine[1]))
+                {
+                    TDATA.Add(SPLine[1], new Dictionary<string,List<List<string>>>);
+                }
+                if (!TDATA[SPLine[1]].Keys.Contains(Date))//如果沒有該日期資料
                 {
                     
                     List<List<string>> L = new List<List<string>>();
@@ -94,22 +99,30 @@ namespace Transer
                         L.Add(new List<string>());
                         for (int o = 0; o < 56; o++) L[i].Add("");
                     }
-                    TDATA.Add(Date, L);
+                    TDATA[SPLine[1]].Add(Date, L);
 
                 }
-                for (int i = 0; i < 24; i++)if(SPLine[6 + i]!="nan") TDATA[Date][i][Convert.ToInt32(SPLine[2]) - 1] = SPLine[6 + i];
+                for (int i = 0; i < 24; i++)if(SPLine[6 + i]!="nan") TDATA[SPLine[1]][Date][i][Convert.ToInt32(SPLine[2]) - 1] = SPLine[6 + i];
                 backgroundWorker1.ReportProgress(++RPG);
+
             }
-            TBOX1S += "測站,日期,時間,\"類別(ppbC)\",\"Ethane(ppbC)\",\"Ethylene(ppbC)\",\"Propane(ppbC)\",\"Propylene(ppbC)\",\"Isobutane(ppbC)\",\"n-Butane(ppbC)\",\"Acetylene(ppbC)\",\"t-2-Butene(ppbC)\",\"1-Butene(ppbC)\",\"cis-2-Butene(ppbC)\",\"Cyclopentane(ppbC)\",\"Isopentane(ppbC)\",\"n-Pentane(ppbC)\",\"t-2-Pentene(ppbC)\",\"1-Pentene(ppbC)\",\"cis-2-Pentene(ppbC)\",\"2,2-Dimethylbutane(ppbC)\",\"2,3-Dimethylbutane(ppbC)\",\"2-Methylpentane(ppbC)\",\"3-Methylpentane(ppbC)\",\"Isoprene(ppbC)\",\"1-Hexene(ppbC)\",\"n-Hexane(ppbC)\",\"Methylcyclopentane(ppbC)\",\"2,4-Dimethylpentane(ppbC)\",\"Benzene(ppbC)\",\"Cyclohexane(ppbC)\",\"2-Methylhexane(ppbC)\",\"2,3-Dimethylpentane(ppbC)\",\"3-Methylhexane(ppbC)\",\"2,2,4-Trimethylpentane(ppbC)\",\"n-Heptane(ppbC)\",\"Methylcyclohexane(ppbC)\",\"2,3,4-Trimethylpentane(ppbC)\",\"Toluene(ppbC)\",\"2-Methylheptane(ppbC)\",\"3-Methylheptane(ppbC)\",\"n-Octane(ppbC)\",\"Ethylbenzene(ppbC)\",\"m,p-Xylene(ppbC)\",\"Styrene(ppbC)\",\"o-Xylene(ppbC)\",\"n-Nonane(ppbC)\",\"Isopropylbenzene(ppbC)\",\"n-Propylbenzene(ppbC)\",\"m-Ethyltoluene(ppbC)\",\"p-Ethyltoluene(ppbC)\",\"1,3,5-Trimethylbenzene(ppbC)\",\"o-Ethyltoluene(ppbC)\",\"1,2,4-Trimethylbenzene(ppbC)\",\"n-Decane(ppbC)\",\"1,2,3-Trimethylbenzene(ppbC)\",\"m-Diethylbenzene(ppbC)\",\"p-Diethylbenzene(ppbC)\",\"n-Undecane(ppbC)\",\"n-Dodecane(ppbC)\"\n";
-            foreach (string Time in TDATA.Keys)
+            string File_Head= "測站,日期,時間,\"類別(ppbC)\",\"Ethane(ppbC)\",\"Ethylene(ppbC)\",\"Propane(ppbC)\",\"Propylene(ppbC)\",\"Isobutane(ppbC)\",\"n-Butane(ppbC)\",\"Acetylene(ppbC)\",\"t-2-Butene(ppbC)\",\"1-Butene(ppbC)\",\"cis-2-Butene(ppbC)\",\"Cyclopentane(ppbC)\",\"Isopentane(ppbC)\",\"n-Pentane(ppbC)\",\"t-2-Pentene(ppbC)\",\"1-Pentene(ppbC)\",\"cis-2-Pentene(ppbC)\",\"2,2-Dimethylbutane(ppbC)\",\"2,3-Dimethylbutane(ppbC)\",\"2-Methylpentane(ppbC)\",\"3-Methylpentane(ppbC)\",\"Isoprene(ppbC)\",\"1-Hexene(ppbC)\",\"n-Hexane(ppbC)\",\"Methylcyclopentane(ppbC)\",\"2,4-Dimethylpentane(ppbC)\",\"Benzene(ppbC)\",\"Cyclohexane(ppbC)\",\"2-Methylhexane(ppbC)\",\"2,3-Dimethylpentane(ppbC)\",\"3-Methylhexane(ppbC)\",\"2,2,4-Trimethylpentane(ppbC)\",\"n-Heptane(ppbC)\",\"Methylcyclohexane(ppbC)\",\"2,3,4-Trimethylpentane(ppbC)\",\"Toluene(ppbC)\",\"2-Methylheptane(ppbC)\",\"3-Methylheptane(ppbC)\",\"n-Octane(ppbC)\",\"Ethylbenzene(ppbC)\",\"m,p-Xylene(ppbC)\",\"Styrene(ppbC)\",\"o-Xylene(ppbC)\",\"n-Nonane(ppbC)\",\"Isopropylbenzene(ppbC)\",\"n-Propylbenzene(ppbC)\",\"m-Ethyltoluene(ppbC)\",\"p-Ethyltoluene(ppbC)\",\"1,3,5-Trimethylbenzene(ppbC)\",\"o-Ethyltoluene(ppbC)\",\"1,2,4-Trimethylbenzene(ppbC)\",\"n-Decane(ppbC)\",\"1,2,3-Trimethylbenzene(ppbC)\",\"m-Diethylbenzene(ppbC)\",\"p-Diethylbenzene(ppbC)\",\"n-Undecane(ppbC)\",\"n-Dodecane(ppbC)\"\n";
+            Dictionary<string, List<string>> Files = new Dictionary<string, List<string>>(); 
+            foreach (string station in TDATA.Keys)
             {
-                
-                for (int i = 0; i < 24; i++)
+                Files.Add(station, new List<string>());
+                Files[station].Add(File_Head);
+                foreach (string Time in TDATA[station].Keys)
                 {
-                    TBOX1S += "臺西" + ",";
-                    TBOX1S += Time + "," + i.ToString()+",QA後";
-                    for (int o = 0; o < 56; o++) TBOX1S += "," + TDATA[Time][i][o];
-                    TBOX1S += "\n";
+                    string NewLine = "";
+                    for (int i = 0; i < 24; i++)
+                    {
+                        NewLine += station + ",";
+                        NewLine += Time + "," + i.ToString() + ",QA後";
+                        for (int o = 0; o < 56; o++) NewLine += "," + TDATA[station][Time][i][o];
+                        NewLine += "\n";
+                    }
+                    Files[station].Add(NewLine);
                 }
             }
             backgroundWorker1.ReportProgress(++RPG);
