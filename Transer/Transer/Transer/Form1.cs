@@ -20,9 +20,7 @@ namespace Transer
         }
         List<string> ReadFile;
         Dictionary<string,SortedDictionary<string, List<List<string>>>> TDATA;
-
-        string TBOX1S = "";
-
+        string OPdate = "";
         List<string> CSVLSpliter(string s)
         {
             List<string> SA = new List<string>();
@@ -66,8 +64,6 @@ namespace Transer
                 {
                     temp += s[i];
                 }
-
-
             }
 
             
@@ -78,17 +74,15 @@ namespace Transer
         private void Transer(BackgroundWorker worker,EventArgs e)
         {
             int RPG = 0;
-            TBOX1S = "";
             TDATA = new Dictionary<string,SortedDictionary<string, List< List<string>>>>();
-            ReadFile.RemoveAt(0);
-            
             foreach (string Line in ReadFile)
             {
                 List<string> SPLine =CSVLSpliter(Line);
+                if (OPdate == "") OPdate = SPLine[5].Split('-')[0] + SPLine[5].Split('-')[1];
                 string Date = SPLine[5].Replace('-', '/');
                 if (!TDATA.Keys.Contains(SPLine[1]))
                 {
-                    TDATA.Add(SPLine[1], new Dictionary<string,List<List<string>>>);
+                    TDATA.Add(SPLine[1], new SortedDictionary<string,List<List<string>>>());
                 }
                 if (!TDATA[SPLine[1]].Keys.Contains(Date))//如果沒有該日期資料
                 {
@@ -104,10 +98,33 @@ namespace Transer
                 }
                 for (int i = 0; i < 24; i++)if(SPLine[6 + i]!="nan") TDATA[SPLine[1]][Date][i][Convert.ToInt32(SPLine[2]) - 1] = SPLine[6 + i];
                 backgroundWorker1.ReportProgress(++RPG);
+            }    
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
 
+            ofd.Title = "選擇CSV檔案";
+            ofd.Filter = "CSV Files (.csv)|*.csv|All Files(*.*)|*.*";
+            ofd.FilterIndex = 1;
+            ofd.Multiselect = false;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                textBox2.Text = ofd.FileName; 
+                string filename = ofd.FileName;
+                Encoding ec = Encoding.GetEncoding("big5");
+                ReadFile = File.ReadAllLines(filename, ec).ToList<string>();
+                ReadFile.RemoveAt(0);
+                progressBar1.Maximum = ReadFile.Count();
+                progressBar1.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
             }
-            string File_Head= "測站,日期,時間,\"類別(ppbC)\",\"Ethane(ppbC)\",\"Ethylene(ppbC)\",\"Propane(ppbC)\",\"Propylene(ppbC)\",\"Isobutane(ppbC)\",\"n-Butane(ppbC)\",\"Acetylene(ppbC)\",\"t-2-Butene(ppbC)\",\"1-Butene(ppbC)\",\"cis-2-Butene(ppbC)\",\"Cyclopentane(ppbC)\",\"Isopentane(ppbC)\",\"n-Pentane(ppbC)\",\"t-2-Pentene(ppbC)\",\"1-Pentene(ppbC)\",\"cis-2-Pentene(ppbC)\",\"2,2-Dimethylbutane(ppbC)\",\"2,3-Dimethylbutane(ppbC)\",\"2-Methylpentane(ppbC)\",\"3-Methylpentane(ppbC)\",\"Isoprene(ppbC)\",\"1-Hexene(ppbC)\",\"n-Hexane(ppbC)\",\"Methylcyclopentane(ppbC)\",\"2,4-Dimethylpentane(ppbC)\",\"Benzene(ppbC)\",\"Cyclohexane(ppbC)\",\"2-Methylhexane(ppbC)\",\"2,3-Dimethylpentane(ppbC)\",\"3-Methylhexane(ppbC)\",\"2,2,4-Trimethylpentane(ppbC)\",\"n-Heptane(ppbC)\",\"Methylcyclohexane(ppbC)\",\"2,3,4-Trimethylpentane(ppbC)\",\"Toluene(ppbC)\",\"2-Methylheptane(ppbC)\",\"3-Methylheptane(ppbC)\",\"n-Octane(ppbC)\",\"Ethylbenzene(ppbC)\",\"m,p-Xylene(ppbC)\",\"Styrene(ppbC)\",\"o-Xylene(ppbC)\",\"n-Nonane(ppbC)\",\"Isopropylbenzene(ppbC)\",\"n-Propylbenzene(ppbC)\",\"m-Ethyltoluene(ppbC)\",\"p-Ethyltoluene(ppbC)\",\"1,3,5-Trimethylbenzene(ppbC)\",\"o-Ethyltoluene(ppbC)\",\"1,2,4-Trimethylbenzene(ppbC)\",\"n-Decane(ppbC)\",\"1,2,3-Trimethylbenzene(ppbC)\",\"m-Diethylbenzene(ppbC)\",\"p-Diethylbenzene(ppbC)\",\"n-Undecane(ppbC)\",\"n-Dodecane(ppbC)\"\n";
-            Dictionary<string, List<string>> Files = new Dictionary<string, List<string>>(); 
+        }
+        private void Outputer(BackgroundWorker worker, EventArgs e)
+        {
+            int RPG = 0;
+            string File_Head = "測站,日期,時間,\"類別(ppbC)\",\"Ethane(ppbC)\",\"Ethylene(ppbC)\",\"Propane(ppbC)\",\"Propylene(ppbC)\",\"Isobutane(ppbC)\",\"n-Butane(ppbC)\",\"Acetylene(ppbC)\",\"t-2-Butene(ppbC)\",\"1-Butene(ppbC)\",\"cis-2-Butene(ppbC)\",\"Cyclopentane(ppbC)\",\"Isopentane(ppbC)\",\"n-Pentane(ppbC)\",\"t-2-Pentene(ppbC)\",\"1-Pentene(ppbC)\",\"cis-2-Pentene(ppbC)\",\"2,2-Dimethylbutane(ppbC)\",\"2,3-Dimethylbutane(ppbC)\",\"2-Methylpentane(ppbC)\",\"3-Methylpentane(ppbC)\",\"Isoprene(ppbC)\",\"1-Hexene(ppbC)\",\"n-Hexane(ppbC)\",\"Methylcyclopentane(ppbC)\",\"2,4-Dimethylpentane(ppbC)\",\"Benzene(ppbC)\",\"Cyclohexane(ppbC)\",\"2-Methylhexane(ppbC)\",\"2,3-Dimethylpentane(ppbC)\",\"3-Methylhexane(ppbC)\",\"2,2,4-Trimethylpentane(ppbC)\",\"n-Heptane(ppbC)\",\"Methylcyclohexane(ppbC)\",\"2,3,4-Trimethylpentane(ppbC)\",\"Toluene(ppbC)\",\"2-Methylheptane(ppbC)\",\"3-Methylheptane(ppbC)\",\"n-Octane(ppbC)\",\"Ethylbenzene(ppbC)\",\"m,p-Xylene(ppbC)\",\"Styrene(ppbC)\",\"o-Xylene(ppbC)\",\"n-Nonane(ppbC)\",\"Isopropylbenzene(ppbC)\",\"n-Propylbenzene(ppbC)\",\"m-Ethyltoluene(ppbC)\",\"p-Ethyltoluene(ppbC)\",\"1,3,5-Trimethylbenzene(ppbC)\",\"o-Ethyltoluene(ppbC)\",\"1,2,4-Trimethylbenzene(ppbC)\",\"n-Decane(ppbC)\",\"1,2,3-Trimethylbenzene(ppbC)\",\"m-Diethylbenzene(ppbC)\",\"p-Diethylbenzene(ppbC)\",\"n-Undecane(ppbC)\",\"n-Dodecane(ppbC)\"\n";
+            Dictionary<string, List<string>> Files = new Dictionary<string, List<string>>();
             foreach (string station in TDATA.Keys)
             {
                 Files.Add(station, new List<string>());
@@ -123,54 +140,40 @@ namespace Transer
                         NewLine += "\n";
                     }
                     Files[station].Add(NewLine);
+                    backgroundWorker2.ReportProgress(++RPG);
                 }
             }
-            backgroundWorker1.ReportProgress(++RPG);
-
-        }
-
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            ofd.Title = "選擇CSV檔案";
-            ofd.Filter = "CSV Files (.csv)|*.csv|All Files(*.*)|*.*";
-            ofd.FilterIndex = 1;
-            ofd.Multiselect = false;
-            if (ofd.ShowDialog() == DialogResult.OK)
+            foreach (string F in Files.Keys)
             {
-                textBox2.Text = ofd.FileName; 
-                string filename = ofd.FileName;
-                Encoding ec = Encoding.GetEncoding("big5");
-                ReadFile = File.ReadAllLines(filename, ec).ToList<string>();
-                progressBar1.Maximum = ReadFile.Count();
-                progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
-                
-               
-                
+                FileStream FS = File.Create(COFD.FileName + @"\" + OPdate + "_" + F + ".csv");
+                StreamWriter SW = new StreamWriter(FS, Encoding.GetEncoding("big5"));
+                foreach(string OP in Files[F]) SW.Write(OP);
 
-            }
-
+                SW.Close();
+                backgroundWorker2.ReportProgress(++RPG);
+            }   
+            OPdate = "";
         }
 
+        CommonOpenFileDialog COFD = new CommonOpenFileDialog();
         private void button2_Click(object sender, EventArgs e)
         {
-            CommonOpenFileDialog COFD = new CommonOpenFileDialog();
+            
             COFD.InitialDirectory=@"C:\";
             COFD.IsFolderPicker = true;
             COFD.Title = "選擇儲存路徑";
+                       
             if (COFD.ShowDialog() == CommonFileDialogResult.Ok)
             {
-               FileStream FS= File.Create(COFD.FileName + @"\TEST1.csv");
-                StreamWriter SW = new StreamWriter(FS,  Encoding.GetEncoding("big5"));
-                SW.Write(TBOX1S);
-                SW.Close();
-                MessageBox.Show("輸出已完成", "Transer");
+                
+                int Process = 0;
+                foreach (string s in TDATA.Keys) Process += TDATA[s].Count;
+                progressBar1.Maximum = Process + TDATA.Count;
+                progressBar1.Value = 0;
+                backgroundWorker2.RunWorkerAsync();
             }
-
+            else MessageBox.Show("輸出已取消", "Transer");
+            button2.Enabled = false;
 
         }
 
@@ -178,21 +181,36 @@ namespace Transer
         {
 
         }
-
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker BW = (BackgroundWorker)sender;
             Transer(BW, e);
         }
-
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
-
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             MessageBox.Show("轉換完成，已可輸出", "Transer");
+            button2.Enabled = true;
         }
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker BW = (BackgroundWorker)sender;
+            Outputer(BW, e);
+        }
+
+        private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show("輸出已完成", "Transer");
+            
+        }
+
     }
 }
