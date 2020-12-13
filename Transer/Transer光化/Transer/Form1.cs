@@ -22,6 +22,7 @@ namespace Transer
         Dictionary<string,SortedDictionary<string, List<List<string>>>> TDATA;
         CommonOpenFileDialog COFD = new CommonOpenFileDialog();
         string OPdate = "";
+        List<string> OPstation = new List<string>();
         List<string> CSVLSpliter(string s)
         {
             List<string> SA = new List<string>();
@@ -123,7 +124,7 @@ namespace Transer
             int RPG = 0;
             string File_Head = "測站,日期,時間,\"類別(ppbC)\",\"Ethane(ppbC)\",\"Ethylene(ppbC)\",\"Propane(ppbC)\",\"Propylene(ppbC)\",\"Isobutane(ppbC)\",\"n-Butane(ppbC)\",\"Acetylene(ppbC)\",\"t-2-Butene(ppbC)\",\"1-Butene(ppbC)\",\"cis-2-Butene(ppbC)\",\"Cyclopentane(ppbC)\",\"Isopentane(ppbC)\",\"n-Pentane(ppbC)\",\"t-2-Pentene(ppbC)\",\"1-Pentene(ppbC)\",\"cis-2-Pentene(ppbC)\",\"2,2-Dimethylbutane(ppbC)\",\"2,3-Dimethylbutane(ppbC)\",\"2-Methylpentane(ppbC)\",\"3-Methylpentane(ppbC)\",\"Isoprene(ppbC)\",\"1-Hexene(ppbC)\",\"n-Hexane(ppbC)\",\"Methylcyclopentane(ppbC)\",\"2,4-Dimethylpentane(ppbC)\",\"Benzene(ppbC)\",\"Cyclohexane(ppbC)\",\"2-Methylhexane(ppbC)\",\"2,3-Dimethylpentane(ppbC)\",\"3-Methylhexane(ppbC)\",\"2,2,4-Trimethylpentane(ppbC)\",\"n-Heptane(ppbC)\",\"Methylcyclohexane(ppbC)\",\"2,3,4-Trimethylpentane(ppbC)\",\"Toluene(ppbC)\",\"2-Methylheptane(ppbC)\",\"3-Methylheptane(ppbC)\",\"n-Octane(ppbC)\",\"Ethylbenzene(ppbC)\",\"m,p-Xylene(ppbC)\",\"Styrene(ppbC)\",\"o-Xylene(ppbC)\",\"n-Nonane(ppbC)\",\"Isopropylbenzene(ppbC)\",\"n-Propylbenzene(ppbC)\",\"m-Ethyltoluene(ppbC)\",\"p-Ethyltoluene(ppbC)\",\"1,3,5-Trimethylbenzene(ppbC)\",\"o-Ethyltoluene(ppbC)\",\"1,2,4-Trimethylbenzene(ppbC)\",\"n-Decane(ppbC)\",\"1,2,3-Trimethylbenzene(ppbC)\",\"m-Diethylbenzene(ppbC)\",\"p-Diethylbenzene(ppbC)\",\"n-Undecane(ppbC)\",\"n-Dodecane(ppbC)\"\n";
             Dictionary<string, List<string>> Files = new Dictionary<string, List<string>>();
-            foreach (string station in TDATA.Keys)
+            foreach (string station in OPstation)
             {
                 Files.Add(station, new List<string>());
                 Files[station].Add(File_Head);
@@ -160,12 +161,14 @@ namespace Transer
             COFD.InitialDirectory=@"C:\";
             COFD.IsFolderPicker = true;
             COFD.Title = "選擇儲存路徑";
-                       
+            OPstation.Clear();
+            for (int i = 0; i < checkedListBox1.Items.Count; i++) if (checkedListBox1.GetItemChecked(i)) OPstation.Add(checkedListBox1.Items[i].ToString());
+
             if (COFD.ShowDialog() == CommonFileDialogResult.Ok)
             {  
                 int Process = 0;
-                foreach (string s in TDATA.Keys) Process += TDATA[s].Count;
-                progressBar1.Maximum = Process + TDATA.Count;
+                foreach (string s in OPstation) Process += TDATA[s].Count;
+                progressBar1.Maximum = Process + OPstation.Count;
                 progressBar1.Value = 0;
                 backgroundWorker2.RunWorkerAsync();
             }
@@ -193,6 +196,8 @@ namespace Transer
             button5.Enabled = true;
             listBox1.Items.Clear();
             button2.Enabled = true;
+            checkedListBox1.Items.Clear();
+            foreach (string station in TDATA.Keys) checkedListBox1.Items.Add(station);
         }
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -219,7 +224,12 @@ namespace Transer
                 {
                     Encoding ec = Encoding.GetEncoding("big5");
                     List<string> Temp = File.ReadAllLines(IPFname, ec).ToList();
-                   Temp.RemoveAt(0);
+                    if (Temp[0] != "SiteId,SiteName,ItemId,ItemEngName,ItemUnit,MonitorDate,MonitorValue00,MonitorValue01,MonitorValue02,MonitorValue03,MonitorValue04,MonitorValue05,MonitorValue06,MonitorValue07,MonitorValue08,MonitorValue09,MonitorValue10,MonitorValue11,MonitorValue12,MonitorValue13,MonitorValue14,MonitorValue15,MonitorValue16,MonitorValue17,MonitorValue18,MonitorValue19,MonitorValue20,MonitorValue21,MonitorValue22,MonitorValue23")
+                    {
+                        MessageBox.Show(IPFname + "標頭不符合規定，故跳過", "Transer");
+                        continue;
+                    }
+                    Temp.RemoveAt(0);
                     ReadFile = ReadFile.Concat(Temp).ToList();
                     
                 }
@@ -252,5 +262,17 @@ namespace Transer
 
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, checkBox1.Checked);
+            }
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

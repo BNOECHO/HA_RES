@@ -139,7 +139,7 @@ namespace Transer
             }
             foreach (string F in Files.Keys)
             {
-                FileStream FS = File.Create(COFD.FileName + @"\" + OPdate + "_" + F + ".csv");
+                FileStream FS = File.Create(COFD.FileName + @"\" + OPdate + "_" + F + "_普通.csv");
                 StreamWriter SW = new StreamWriter(FS, Encoding.GetEncoding("big5"));
                 foreach(string OP in Files[F]) SW.Write(OP);
 
@@ -219,7 +219,12 @@ namespace Transer
                 {
                     Encoding ec = Encoding.GetEncoding("big5");
                     List<string> Temp = File.ReadAllLines(IPFname, ec).ToList();
-                   Temp.RemoveAt(0);
+                    if (Temp[0] != "SiteId,SiteName,ItemId,ItemName,ItemEngName,ItemUnit,MonitorDate,MonitorValue00,MonitorValue01,MonitorValue02,MonitorValue03,MonitorValue04,MonitorValue05,MonitorValue06,MonitorValue07,MonitorValue08,MonitorValue09,MonitorValue10,MonitorValue11,MonitorValue12,MonitorValue13,MonitorValue14,MonitorValue15,MonitorValue16,MonitorValue17,MonitorValue18,MonitorValue19,MonitorValue20,MonitorValue21,MonitorValue22,MonitorValue23")
+                    {
+                        MessageBox.Show(IPFname+"標頭不符合規定，故跳過", "Transer");
+                        continue;
+                    }
+                    Temp.RemoveAt(0);
                     ReadFile = ReadFile.Concat(Temp).ToList();
                     
                 }
@@ -261,5 +266,9 @@ namespace Transer
 
         }
 
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
