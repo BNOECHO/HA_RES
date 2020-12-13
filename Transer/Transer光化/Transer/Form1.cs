@@ -20,6 +20,7 @@ namespace Transer
         }
         List<string> ReadFile;
         Dictionary<string,SortedDictionary<string, List<List<string>>>> TDATA;
+        CommonOpenFileDialog COFD = new CommonOpenFileDialog();
         string OPdate = "";
         List<string> CSVLSpliter(string s)
         {
@@ -102,23 +103,20 @@ namespace Transer
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-
-            ofd.Title = "選擇CSV檔案";
-            ofd.Filter = "CSV Files (.csv)|*.csv|All Files(*.*)|*.*";
-            ofd.FilterIndex = 1;
-            ofd.Multiselect = false;
-            if (ofd.ShowDialog() == DialogResult.OK)
+            CommonOpenFileDialog OPPath = new CommonOpenFileDialog();
+            OPPath.InitialDirectory = @"C:\";
+            OPPath.IsFolderPicker = true;
+            OPPath.Title = "選擇讀取路徑";
+            if (OPPath.ShowDialog()==CommonFileDialogResult.Ok)
             {
-                textBox2.Text = ofd.FileName; 
-                string filename = ofd.FileName;
-                Encoding ec = Encoding.GetEncoding("big5");
-                ReadFile = File.ReadAllLines(filename, ec).ToList<string>();
-                ReadFile.RemoveAt(0);
-                progressBar1.Maximum = ReadFile.Count();
-                progressBar1.Value = 0;
-                backgroundWorker1.RunWorkerAsync();
+                DirectoryInfo directory = new DirectoryInfo(OPPath.FileName);
+                foreach (FileInfo path in directory.GetFiles("*.csv"))
+                {
+                   string new_file = path.DirectoryName + "\\" + path.Name;
+                   if(!listBox1.Items.Contains(new_file)) listBox1.Items.Add(new_file);
+                }
             }
+
         }
         private void Outputer(BackgroundWorker worker, EventArgs e)
         {
@@ -155,7 +153,7 @@ namespace Transer
             OPdate = "";
         }
 
-        CommonOpenFileDialog COFD = new CommonOpenFileDialog();
+        
         private void button2_Click(object sender, EventArgs e)
         {
             
@@ -164,8 +162,7 @@ namespace Transer
             COFD.Title = "選擇儲存路徑";
                        
             if (COFD.ShowDialog() == CommonFileDialogResult.Ok)
-            {
-                
+            {  
                 int Process = 0;
                 foreach (string s in TDATA.Keys) Process += TDATA[s].Count;
                 progressBar1.Maximum = Process + TDATA.Count;
@@ -193,6 +190,8 @@ namespace Transer
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             MessageBox.Show("轉換完成，已可輸出", "Transer");
+            button5.Enabled = true;
+            listBox1.Items.Clear();
             button2.Enabled = true;
         }
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
@@ -200,16 +199,57 @@ namespace Transer
             BackgroundWorker BW = (BackgroundWorker)sender;
             Outputer(BW, e);
         }
-
         private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
         }
-
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             MessageBox.Show("輸出已完成", "Transer");
             
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ReadFile = new List<string>();
+
+            if (listBox1.Items.Count > 0)
+            {
+
+                foreach (string IPFname in listBox1.Items)
+                {
+                    Encoding ec = Encoding.GetEncoding("big5");
+                    List<string> Temp = File.ReadAllLines(IPFname, ec).ToList();
+                   Temp.RemoveAt(0);
+                    ReadFile = ReadFile.Concat(Temp).ToList();
+                    
+                }
+
+                progressBar1.Maximum = ReadFile.Count();
+                progressBar1.Value = 0;
+                backgroundWorker1.RunWorkerAsync();
+                button5.Enabled = false;
+            }
+            else MessageBox.Show("輸入檔案為空", "Transer");
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "選擇CSV檔案";
+            ofd.Filter = "CSV Files (.csv)|*.csv|All Files(*.*)|*.*";
+            ofd.FilterIndex = 1;
+            ofd.Multiselect = false;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                if (!listBox1.Items.Contains(ofd.FileName)) listBox1.Items.Add(ofd.FileName);
+            }
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Remove(listBox1.SelectedItem);
+
         }
 
     }
