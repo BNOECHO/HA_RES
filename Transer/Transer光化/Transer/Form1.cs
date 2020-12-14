@@ -144,7 +144,7 @@ namespace Transer
             }
             foreach (string F in Files.Keys)
             {
-                FileStream FS = File.Create(COFD.FileName + @"\" + OPdate + "_" + F + ".csv");
+                FileStream FS = File.Create(COFD.FileName + @"\" + OPdate + "_" + F + "_光化.csv");
                 StreamWriter SW = new StreamWriter(FS, Encoding.GetEncoding("big5"));
                 foreach(string OP in Files[F]) SW.Write(OP);
 

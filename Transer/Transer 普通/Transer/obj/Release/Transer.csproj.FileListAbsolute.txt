@@ -1,0 +1,23 @@
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Transer.exe.config
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Transer.exe
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Transer.pdb
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Microsoft.WindowsAPICodePack.dll
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Microsoft.WindowsAPICodePack.Shell.dll
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Microsoft.WindowsAPICodePack.xml
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Microsoft.WindowsAPICodePack.Shell.xml
+D:\HA_RES\Transer\Transer 普通\Transer\obj\Release\Transer.Form1.resources
+D:\HA_RES\Transer\Transer 普通\Transer\obj\Release\Transer.csproj.GenerateResource.cache
+D:\HA_RES\Transer\Transer 普通\Transer\obj\Release\Transer.csproj.CoreCompileInputs.cache
+D:\HA_RES\Transer\Transer 普通\Transer\obj\Release\Transer.csproj.CopyComplete
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Transer.exe.CodeAnalysisLog.xml
+D:\HA_RES\Transer\Transer 普通\Transer\bin\Release\Transer.exe.lastcodeanalysissucceeded
+C:\Users\enoch\Desktop\Transer.exe.config
+C:\Users\enoch\Desktop\Transer.exe
+C:\Users\enoch\Desktop\Transer.pdb
+D:\HA_RES\Transer\Transer 普通\Transer\obj\Release\Transer.csprojAssemblyReference.cache
+C:\Users\enoch\Desktop\轉換器_普通\Transer_普通.exe.config
+C:\Users\enoch\Desktop\轉換器_普通\Transer_普通.exe
+C:\Users\enoch\Desktop\轉換器_普通\Transer_普通.pdb
+D:\HA_RES\Transer\Transer 普通\Transer\obj\Release\Transer_普通.Properties.Resources.resources
+D:\HA_RES\Transer\Transer 普通\Transer\obj\Release\Transer_普通.exe
+D:\HA_RES\Transer\Transer 普通\Transer\obj\Release\Transer_普通.pdb
