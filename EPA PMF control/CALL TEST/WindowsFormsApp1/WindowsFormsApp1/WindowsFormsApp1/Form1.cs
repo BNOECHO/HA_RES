@@ -162,12 +162,37 @@ namespace WindowsFormsApp1
                 TABHandle = FindWindowEx(EPA_PMF, 0, "WindowsForms10.SysTabControl32.app.0.378734a", "");
                 if (TABHandle != IntPtr.Zero)
                 {
-                    IntPtr TABp1 = new IntPtr(0);
+                    SendMessage(TABHandle, 0x1300 + 12, 1, 0);//成功切換，但系統未繪製PANEL
+                    IntPtr TABHandleL2 = new IntPtr(0);
+                    TABHandleL2 = FindWindowEx(TABHandle, 0, "WindowsForms10.Window.8.app.0.378734a", "Base Model");
+                    if (TABHandleL2 != IntPtr.Zero)
+                    {
+                        IntPtr _2TABHandle = new IntPtr(0);
+                        _2TABHandle = FindWindowEx(TABHandleL2, 0, "WindowsForms10.SysTabControl32.app.0.378734a", "");
+                        if (_2TABHandle != IntPtr.Zero)
+                        {
+                            IntPtr _2TABHandleL2 = new IntPtr(0);
+                            _2TABHandleL2 = FindWindowEx(_2TABHandle, 0, "WindowsForms10.Window.8.app.0.378734a", "Base Model Runs");
+                            if (_2TABHandleL2 != IntPtr.Zero)
+                            {
+                                IntPtr BMR = new IntPtr(0);
+                                BMR = FindWindowEx(_2TABHandleL2, 0, "WindowsForms10.Window.8.app.0.378734a", "Base Model Runs");
+                                if (BMR != IntPtr.Zero)
+                                {
+                                    IntPtr TBHandle = new IntPtr(0);
+                                    TBHandle = FindWindowEx(BMR, 0, "WindowsForms10.EDIT.app.0.378734a", "20");
+                                    if (TBHandle != IntPtr.Zero)
+                                    {
+                                        SetForegroundWindow(TBHandle);
+                                        SendMessage(TBHandle, 0x000C, IntPtr.Zero, "20");
+                                    }
+                                }
+                            }
+                        }
+                    }
 
                 }
-
             }
-
 
         }
     
