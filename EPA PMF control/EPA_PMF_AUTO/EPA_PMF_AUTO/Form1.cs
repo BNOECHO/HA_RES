@@ -124,7 +124,7 @@ namespace EPA_PMF_AUTO
             {
                 ExeConfigurationFileMap ExConfig = new ExeConfigurationFileMap();
                 ExConfig.ExeConfigFilename = System.IO.Path.GetFullPath(openFileDialog1.FileName);
-                textBoxCFGLabel.Text = System.IO.Path.GetFullPath(openFileDialog1.FileName);
+                TBCFG.Text = System.IO.Path.GetFullPath(openFileDialog1.FileName);
                 
                 try
                 {
@@ -133,14 +133,21 @@ namespace EPA_PMF_AUTO
                     textBoxUC.Text = Config.AppSettings.Settings["uncFile"].Value.ToString();
                     TBWorksheetC.Text =  Config.AppSettings.Settings["concSheet"].Value.ToString();
                     TBWorksheetUC.Text = Config.AppSettings.Settings["uncSheet"].Value.ToString();
-
+                    Targetfolder.Text = Config.AppSettings.Settings["outFolder"].Value.ToString();
+                    GetDataGrid();
+                    Config.AppSettings.Settings["configFile"].Value = TBCFG.Text;
+                    Config.AppSettings.Settings["chkOverwriteWarning"].Value = 0.ToString() ;
+                    Runtime.Text = Config.AppSettings.Settings["numBaseRuns"].Value.ToString();
+                    FactorBegin.Text = Config.AppSettings.Settings["numBaseFactors"].Value.ToString();
+                    FactorEnd.Text = Config.AppSettings.Settings["numBaseFactors"].Value.ToString();
+                    Config.Save();
 
                 }
                 catch
                 {
                     MessageBox.Show("錯誤的組態檔", "EPA_PMF_AUTORUN");
+                    
                 }
-                GetDataGrid();
 
 
             }
@@ -150,6 +157,34 @@ namespace EPA_PMF_AUTO
         {
             Config.AppSettings.Settings["categories"].Value = CAT;
             Config.Save();
+        }
+
+        private void R_U_N_Click(object sender, EventArgs e)
+        {
+            string TempSaveFolderPath = Targetfolder.Text;
+            Config.AppSettings.Settings["outFolder"].Value = TempSaveFolderPath + "\\" + SpawnTitle.Text;
+            Config.AppSettings.Settings["numBaseRuns"].Value = Runtime.Text;
+            for (int Factor = Convert.ToInt32(FactorBegin.Text); Factor <= Convert.ToInt32(FactorEnd.Text); Factor++)
+            {
+                Config.AppSettings.Settings["numBaseFactors"].Value=Factor.ToString();
+                Config.AppSettings.Settings["outFileQual"].Value = SpawnTitle.Text +"With"+ Factor.ToString() + "Factors";
+                string factor_names = "Factor 1";
+                int RT = Convert.ToInt32(Runtime.Text);
+                for (int i = 1; i < Factor * RT; i++) factor_names += "|Factor " + (i % RT) + 1;
+                Config.AppSettings.Settings["factorNames"].Value = factor_names;
+                Config.Save();
+//TEMP
+                MessageBox.Show("Phase" + (Factor + 1 - Convert.ToInt32(FactorBegin.Text)).ToString() + "Complete");
+
+            }
+            Config.AppSettings.Settings["outFileQual"].Value = SpawnTitle.Text;
+            Config.AppSettings.Settings["outFolder"].Value=TempSaveFolderPath;
+            Config.Save();
+        }
+
+        private void SpawnTitle_TextChanged(object sender, EventArgs e)
+        {
+             R_U_N.Enabled = !(SpawnTitle.Text == "");
         }
 
     }
