@@ -318,7 +318,7 @@ namespace EPA_PMF_AUTO
             // 
             this.ShowStatus.Location = new System.Drawing.Point(12, 303);
             this.ShowStatus.Name = "ShowStatus";
-            this.ShowStatus.Size = new System.Drawing.Size(421, 192);
+            this.ShowStatus.Size = new System.Drawing.Size(353, 192);
             this.ShowStatus.TabIndex = 31;
             this.ShowStatus.Text = "Status:";
             // 

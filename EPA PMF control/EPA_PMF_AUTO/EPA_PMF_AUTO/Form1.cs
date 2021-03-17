@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using Excel= Microsoft.Office.Interop.Excel;
-using System.Data;
 using System.Runtime.InteropServices;
 
 namespace EPA_PMF_AUTO
@@ -139,8 +138,14 @@ namespace EPA_PMF_AUTO
                                 if (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun != IntPtr.Zero)
                                 {
                                     EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run= FindWindowEx(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun, 0, "WindowsForms10.BUTTON.app.0.378734a", "Run");
-                                    
                                     EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun = FindWindowEx(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun, 0, "WindowsForms10.EDIT.app.0.378734a", getTBtry.ToString());
+                                    while (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun == IntPtr.Zero)
+                                    {
+                                        getTBtry++;
+                                        EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun = FindWindowEx(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun, 0, "WindowsForms10.EDIT.app.0.378734a", getTBtry.ToString());
+                                        if (getTBtry > 100) getTBtry = -1;
+
+                                    }
                                 }
                             }
                         }
@@ -339,12 +344,14 @@ namespace EPA_PMF_AUTO
         private void R_U_N_Click(object sender, EventArgs e)
         {
             MessageBox.Show("在開始執行之前，請先將EPA PMF 5.0 切換至\"model data->data files!\"");
+            
             GetEPAPMF.Enabled = false;
             string TempSaveFolderPath = Targetfolder.Text;
             Config.AppSettings.Settings["outFolder"].Value = TempSaveFolderPath + "\\" + SpawnTitle.Text;
             Config.AppSettings.Settings["numBaseRuns"].Value = Runtime.Text;
             for (int Factor = Convert.ToInt32(FactorBegin.Text); Factor <= Convert.ToInt32(FactorEnd.Text); Factor++)
             {
+                
                 Config.AppSettings.Settings["numBaseFactors"].Value=Factor.ToString();
                 Config.AppSettings.Settings["outFileQual"].Value = SpawnTitle.Text +"With"+ Factor.ToString() + "Factors";
                 string factor_names = "Factor 1";
@@ -375,6 +382,7 @@ namespace EPA_PMF_AUTO
             Config.AppSettings.Settings["outFolder"].Value=TempSaveFolderPath;
             Config.Save();
             GetEPAPMF.Enabled = true;
+            MessageBox.Show("已完成!");
         }
 
         private void SpawnTitle_TextChanged(object sender, EventArgs e)
