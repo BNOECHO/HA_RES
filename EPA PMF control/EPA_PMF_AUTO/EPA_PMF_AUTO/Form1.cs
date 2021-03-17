@@ -449,5 +449,14 @@ namespace EPA_PMF_AUTO
         {
 
         }
+
+        private void BrowseFolder_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Targetfolder.Text = folderBrowserDialog1.SelectedPath;
+            }
+
+        }
     }
 }
