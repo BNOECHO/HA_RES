@@ -30,6 +30,7 @@ namespace EPA_PMF_AUTO
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.TBCFG = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -62,6 +63,7 @@ namespace EPA_PMF_AUTO
             this.GetEPAPMF = new System.Windows.Forms.Timer(this.components);
             this.Taged = new System.Windows.Forms.CheckBox();
             this.Geted = new System.Windows.Forms.CheckBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -223,6 +225,7 @@ namespace EPA_PMF_AUTO
             this.BrowseFolder.TabIndex = 20;
             this.BrowseFolder.Text = "設定目標資料夾";
             this.BrowseFolder.UseVisualStyleBackColor = true;
+            this.BrowseFolder.Click += new System.EventHandler(this.BrowseFolder_Click);
             // 
             // label2
             // 
@@ -355,7 +358,7 @@ namespace EPA_PMF_AUTO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 524);
+            this.ClientSize = new System.Drawing.Size(732, 486);
             this.Controls.Add(this.Geted);
             this.Controls.Add(this.Taged);
             this.Controls.Add(this.ShowStatus);
@@ -386,6 +389,7 @@ namespace EPA_PMF_AUTO
             this.Controls.Add(this.labelC);
             this.Controls.Add(this.TBCFG);
             this.Controls.Add(this.button1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "EPA_PMF_AUTORUN By:B";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -428,6 +432,7 @@ namespace EPA_PMF_AUTO
         private System.Windows.Forms.Timer GetEPAPMF;
         private System.Windows.Forms.CheckBox Taged;
         private System.Windows.Forms.CheckBox Geted;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
     }
 }
 

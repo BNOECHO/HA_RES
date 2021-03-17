@@ -1,0 +1,11 @@
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\bin\Release\EPA_PMF_AUTO.exe.config
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\bin\Release\EPA_PMF_AUTO.exe
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\bin\Release\EPA_PMF_AUTO.pdb
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Release\EPA_PMF_AUTO.csprojAssemblyReference.cache
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Release\EPA_PMF_AUTO.csproj.ResolveComReference.cache
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Release\EPA_PMF_AUTO.Form1.resources
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Release\EPA_PMF_AUTO.Properties.Resources.resources
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Release\EPA_PMF_AUTO.csproj.GenerateResource.cache
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Release\EPA_PMF_AUTO.csproj.CoreCompileInputs.cache
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Release\EPA_PMF_AUTO.exe
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Release\EPA_PMF_AUTO.pdb
