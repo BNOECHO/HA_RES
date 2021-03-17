@@ -31,10 +31,186 @@ namespace EPA_PMF_AUTO
             IntPtr hwnd,
             ref int ProcessID
         );
+        [DllImport("user32.dll", EntryPoint = "FindWindow")]
+        public static extern IntPtr FindWindow
+           (
+               string ClassName,
+               string WindowName
+           );
+        [DllImport("user32.dll", EntryPoint = "FindWindowEx", SetLastError = true)]
+        private static extern IntPtr FindWindowEx
+            (
+                IntPtr FatherWDHandle,
+                uint HandleChildAfter,
+                string TatgetClass,
+                string Targetname
+            );
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern int SendMessage
+        (
+            IntPtr THandle,
+            uint SMsg,
+            IntPtr wParam,
+            string IParam
+        );
+        [DllImport("user32.dll", EntryPoint = "SetForegroundWindow", SetLastError = true)]
+        private static extern void SetForegroundWindow
+        (
+            IntPtr Handle
+        );
+        [DllImport("user32.dll", EntryPoint = "SendMessage", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern int SendMessage
+        (
+            IntPtr THandle,
+            uint SMsg,
+            int wParam,
+            int IParam
+        );
+        int getTBtry = 0;
         string CAT = "";
         double CATweak = 1;
         double CATbad = 0.5;
         Configuration Config = null;
+        IntPtr EPA_PMF = new IntPtr(0);
+        IntPtr EPA_PMF_TAB = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_1= new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_1_TAB = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_1_TAB_L2 = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_1_TAB_L2_SaveFile = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_BUTLoad = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_2 = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_2_TAB = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_2_TAB_L2 = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run = new IntPtr(0);
+        IntPtr EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun = new IntPtr(0);
+        private void RenewHwnd()
+        {
+            EPA_PMF = new IntPtr(0);
+            EPA_PMF_TAB = new IntPtr(0);
+            EPA_PMF_TAB_L2_1 = new IntPtr(0);
+            EPA_PMF_TAB_L2_1_TAB = new IntPtr(0);
+            EPA_PMF_TAB_L2_1_TAB_L2 = new IntPtr(0);
+            EPA_PMF_TAB_L2_1_TAB_L2_SaveFile = new IntPtr(0);
+            EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath = new IntPtr(0);
+            EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_BUTLoad = new IntPtr(0);
+            EPA_PMF_TAB_L2_2 = new IntPtr(0);
+            EPA_PMF_TAB_L2_2_TAB = new IntPtr(0);
+            EPA_PMF_TAB_L2_2_TAB_L2 = new IntPtr(0);
+            EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun = new IntPtr(0);
+            EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run = new IntPtr(0);
+            EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun = new IntPtr(0);
+            //start Renew
+            EPA_PMF = FindWindow(null, "EPA PMF");
+            if (EPA_PMF!=IntPtr.Zero)
+            {
+                EPA_PMF_TAB = FindWindowEx(EPA_PMF, 0, "WindowsForms10.SysTabControl32.app.0.378734a", "");
+                if (EPA_PMF_TAB != IntPtr.Zero)
+                { 
+                    EPA_PMF_TAB_L2_1 = FindWindowEx(EPA_PMF_TAB, 0, "WindowsForms10.Window.8.app.0.378734a", "Model Data");
+                    if (EPA_PMF_TAB_L2_1 != IntPtr.Zero)
+                    { 
+                        EPA_PMF_TAB_L2_1_TAB= FindWindowEx(EPA_PMF_TAB_L2_1, 0, "WindowsForms10.SysTabControl32.app.0.378734a", "");
+                        if (EPA_PMF_TAB_L2_1_TAB != IntPtr.Zero)
+                        {
+                            EPA_PMF_TAB_L2_1_TAB_L2= FindWindowEx(EPA_PMF_TAB_L2_1_TAB, 0, "WindowsForms10.Window.8.app.0.378734a", "Data Files");
+                            if (EPA_PMF_TAB_L2_1_TAB_L2 != IntPtr.Zero)
+                            {
+                                EPA_PMF_TAB_L2_1_TAB_L2_SaveFile = FindWindowEx(EPA_PMF_TAB_L2_1_TAB_L2, 0, "WindowsForms10.Window.8.app.0.378734a", "Save File Locations and Settings in a Configuration File or Load a Previous Configuration File");
+                                if (EPA_PMF_TAB_L2_1_TAB_L2_SaveFile != IntPtr.Zero)
+                                {
+                                    EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath = FindWindowEx(EPA_PMF_TAB_L2_1_TAB_L2_SaveFile, 0, "WindowsForms10.EDIT.app.0.378734a", "");
+                                    EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_BUTLoad = FindWindowEx(EPA_PMF_TAB_L2_1_TAB_L2_SaveFile, 0, "WindowsForms10.BUTTON.app.0.378734a", "Load");
+                                }
+                            }
+                        }
+                    }
+                    EPA_PMF_TAB_L2_2 = FindWindowEx(EPA_PMF_TAB, 0, "WindowsForms10.Window.8.app.0.378734a", "Base Model");
+                    if (EPA_PMF_TAB_L2_2 != IntPtr.Zero) 
+                    {
+                        EPA_PMF_TAB_L2_2_TAB= FindWindowEx(EPA_PMF_TAB_L2_2, 0, "WindowsForms10.SysTabControl32.app.0.378734a", "");
+                        if (EPA_PMF_TAB_L2_2_TAB != IntPtr.Zero)
+                        { 
+                            EPA_PMF_TAB_L2_2_TAB_L2 = FindWindowEx(EPA_PMF_TAB_L2_2_TAB, 0, "WindowsForms10.Window.8.app.0.378734a", "Base Model Runs");
+                            if (EPA_PMF_TAB_L2_2_TAB_L2 != IntPtr.Zero)
+                            { 
+                                EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun= FindWindowEx(EPA_PMF_TAB_L2_2_TAB_L2, 0, "WindowsForms10.Window.8.app.0.378734a", "Base Model Runs");
+                                if (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun != IntPtr.Zero)
+                                {
+                                    EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run= FindWindowEx(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun, 0, "WindowsForms10.BUTTON.app.0.378734a", "Run");
+                                    
+                                    EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun = FindWindowEx(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun, 0, "WindowsForms10.EDIT.app.0.378734a", getTBtry.ToString());
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun == IntPtr.Zero) getTBtry++;
+            if (getTBtry > 35) getTBtry = 0;
+            ShowStatus.Text = "Status:\n";
+            ShowStatus.Text+= "EPA_PMF:"+( EPA_PMF != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB:"+(EPA_PMF_TAB != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_1:"+(EPA_PMF_TAB_L2_1 != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_1_TAB:"+(EPA_PMF_TAB_L2_1_TAB != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_1_TAB_L2 :"+(EPA_PMF_TAB_L2_1_TAB_L2 != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_1_TAB_L2_SaveFile:"+(EPA_PMF_TAB_L2_1_TAB_L2_SaveFile != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath:"+(EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_BUTLoad:"+(EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_BUTLoad != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_2:"+(EPA_PMF_TAB_L2_2 != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_2_TAB:"+(EPA_PMF_TAB_L2_2_TAB != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_2_TAB_L2:"+(EPA_PMF_TAB_L2_2_TAB_L2 != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun:"+(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text+= "EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run:"+(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run != IntPtr.Zero).ToString()+"\n";
+            ShowStatus.Text += "EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun:" + (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun != IntPtr.Zero).ToString() + "\n";
+
+
+
+
+
+
+        }
+        private bool SetConfigPath(string Path)
+        {
+            RenewHwnd();
+            SetForegroundWindow(EPA_PMF_TAB_L2_1);//
+            if (EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath == IntPtr.Zero) return true;
+            SetForegroundWindow(EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath);
+            SendMessage(EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath, 0x000C, IntPtr.Zero, Path);
+            return false;
+        }
+        private bool SetNumOfRun(string run)
+        {
+            RenewHwnd();
+            SetForegroundWindow(EPA_PMF_TAB_L2_2);//
+            if (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun == IntPtr.Zero) return true;
+            SetForegroundWindow(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun);
+            SendMessage(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun, 0x000C, IntPtr.Zero, run);
+            return false;
+        }
+        private bool Click_Load()
+        {
+            RenewHwnd();
+            if (EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_BUTLoad == IntPtr.Zero) return true;
+            SendMessage(EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_BUTLoad, 0xF5, 0, 0);
+            return false;
+        }
+        private bool Click_Run()
+        {
+            RenewHwnd();
+            if (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run == IntPtr.Zero) return true;
+            SendMessage(EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run, 0xF5, 0, 0);
+            return false;
+        }
+        private bool Switch_Tab1(int index)
+        {
+            RenewHwnd();
+            if (EPA_PMF_TAB == IntPtr.Zero) return true;
+            SendMessage(EPA_PMF_TAB, 0x1300 + 12, index, 0);
+            return false;
+        }
+
         private void GetDataGrid()
         {
             button2.Enabled = true;
@@ -141,6 +317,7 @@ namespace EPA_PMF_AUTO
                     FactorBegin.Text = Config.AppSettings.Settings["numBaseFactors"].Value.ToString();
                     FactorEnd.Text = Config.AppSettings.Settings["numBaseFactors"].Value.ToString();
                     Config.Save();
+                    SpawnTitle.Enabled = true;
 
                 }
                 catch
@@ -161,6 +338,8 @@ namespace EPA_PMF_AUTO
 
         private void R_U_N_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("在開始執行之前，請先將EPA PMF 5.0 切換至\"model data->data files!\"");
+            GetEPAPMF.Enabled = false;
             string TempSaveFolderPath = Targetfolder.Text;
             Config.AppSettings.Settings["outFolder"].Value = TempSaveFolderPath + "\\" + SpawnTitle.Text;
             Config.AppSettings.Settings["numBaseRuns"].Value = Runtime.Text;
@@ -173,19 +352,102 @@ namespace EPA_PMF_AUTO
                 for (int i = 1; i < Factor * RT; i++) factor_names += "|Factor " + (i % RT) + 1;
                 Config.AppSettings.Settings["factorNames"].Value = factor_names;
                 Config.Save();
-//TEMP
-                MessageBox.Show("Phase" + (Factor + 1 - Convert.ToInt32(FactorBegin.Text)).ToString() + "Complete");
+                //MessageBox.Show("Phase" + (Factor + 1 - Convert.ToInt32(FactorBegin.Text)).ToString() + "Start");
+                Switch_Tab1(0);//3
+                System.Threading.Thread.Sleep(100);
+                SetConfigPath(TBCFG.Text);//5
+                System.Threading.Thread.Sleep(100);
+                Click_Load();//7
+                System.Threading.Thread.Sleep(100);
+                Switch_Tab1(1);//4
+                System.Threading.Thread.Sleep(100);
+                SetConfigPath(TBCFG.Text);//5
+                System.Threading.Thread.Sleep(100);
+                Switch_Tab1(0);//3
+                System.Threading.Thread.Sleep(100);
+                Click_Run();//8
+                System.Threading.Thread.Sleep(100);
+                //TEMP
+                // MessageBox.Show("Phase" + (Factor + 1 - Convert.ToInt32(FactorBegin.Text)).ToString() + "Complete");
 
             }
             Config.AppSettings.Settings["outFileQual"].Value = SpawnTitle.Text;
             Config.AppSettings.Settings["outFolder"].Value=TempSaveFolderPath;
             Config.Save();
+            GetEPAPMF.Enabled = true;
         }
 
         private void SpawnTitle_TextChanged(object sender, EventArgs e)
         {
-             R_U_N.Enabled = !(SpawnTitle.Text == "");
+             Taged.Checked = !(SpawnTitle.Text == "");
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            RenewHwnd();
+
+            Geted.Checked = ((EPA_PMF != IntPtr.Zero) &&
+            (EPA_PMF_TAB != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_1 != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_1_TAB != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_1_TAB_L2 != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_1_TAB_L2_SaveFile != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_ConfigPath != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_1_TAB_L2_SaveFile_BUTLoad != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_2 != IntPtr.Zero) &&
+             (EPA_PMF_TAB_L2_2_TAB != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_2_TAB_L2 != IntPtr.Zero) &&
+             (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun != IntPtr.Zero) &&
+            (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_Run != IntPtr.Zero)&&
+            (EPA_PMF_TAB_L2_2_TAB_L2_BaseModelRun_NumOfRun!=IntPtr.Zero));
+
+        }
+
+
+
+        private void Taged_CheckedChanged(object sender, EventArgs e)
+        {
+            R_U_N.Enabled = Taged.Checked && Geted.Checked;
+        }
+
+        private void Geted_CheckedChanged(object sender, EventArgs e)
+        {
+            R_U_N.Enabled = Taged.Checked && Geted.Checked;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Switch_Tab1(0);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Switch_Tab1(1);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SetConfigPath(TBCFG.Text);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            SetNumOfRun(Runtime.Text);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Click_Load();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Click_Run();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

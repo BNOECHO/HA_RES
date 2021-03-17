@@ -29,6 +29,7 @@ namespace EPA_PMF_AUTO
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.TBCFG = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
@@ -57,6 +58,10 @@ namespace EPA_PMF_AUTO
             this.FactorEnd = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.R_U_N = new System.Windows.Forms.Button();
+            this.ShowStatus = new System.Windows.Forms.Label();
+            this.GetEPAPMF = new System.Windows.Forms.Timer(this.components);
+            this.Taged = new System.Windows.Forms.CheckBox();
+            this.Geted = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button1
@@ -230,6 +235,7 @@ namespace EPA_PMF_AUTO
             // 
             // SpawnTitle
             // 
+            this.SpawnTitle.Enabled = false;
             this.SpawnTitle.Location = new System.Drawing.Point(135, 241);
             this.SpawnTitle.Name = "SpawnTitle";
             this.SpawnTitle.Size = new System.Drawing.Size(185, 22);
@@ -296,6 +302,7 @@ namespace EPA_PMF_AUTO
             // 
             // R_U_N
             // 
+            this.R_U_N.Enabled = false;
             this.R_U_N.Location = new System.Drawing.Point(426, 267);
             this.R_U_N.Name = "R_U_N";
             this.R_U_N.Size = new System.Drawing.Size(109, 23);
@@ -304,11 +311,54 @@ namespace EPA_PMF_AUTO
             this.R_U_N.UseVisualStyleBackColor = true;
             this.R_U_N.Click += new System.EventHandler(this.R_U_N_Click);
             // 
+            // ShowStatus
+            // 
+            this.ShowStatus.Location = new System.Drawing.Point(12, 303);
+            this.ShowStatus.Name = "ShowStatus";
+            this.ShowStatus.Size = new System.Drawing.Size(421, 192);
+            this.ShowStatus.TabIndex = 31;
+            this.ShowStatus.Text = "Status:";
+            // 
+            // GetEPAPMF
+            // 
+            this.GetEPAPMF.Enabled = true;
+            this.GetEPAPMF.Interval = 300;
+            this.GetEPAPMF.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // Taged
+            // 
+            this.Taged.AutoSize = true;
+            this.Taged.BackColor = System.Drawing.Color.White;
+            this.Taged.Enabled = false;
+            this.Taged.Location = new System.Drawing.Point(543, 210);
+            this.Taged.Name = "Taged";
+            this.Taged.Size = new System.Drawing.Size(108, 16);
+            this.Taged.TabIndex = 32;
+            this.Taged.Text = "已填寫批次標記";
+            this.Taged.UseVisualStyleBackColor = false;
+            this.Taged.CheckedChanged += new System.EventHandler(this.Taged_CheckedChanged);
+            // 
+            // Geted
+            // 
+            this.Geted.AutoSize = true;
+            this.Geted.BackColor = System.Drawing.Color.White;
+            this.Geted.Enabled = false;
+            this.Geted.Location = new System.Drawing.Point(543, 232);
+            this.Geted.Name = "Geted";
+            this.Geted.Size = new System.Drawing.Size(108, 16);
+            this.Geted.TabIndex = 33;
+            this.Geted.Text = "已取得所有目標";
+            this.Geted.UseVisualStyleBackColor = false;
+            this.Geted.CheckedChanged += new System.EventHandler(this.Geted_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 450);
+            this.ClientSize = new System.Drawing.Size(732, 524);
+            this.Controls.Add(this.Geted);
+            this.Controls.Add(this.Taged);
+            this.Controls.Add(this.ShowStatus);
             this.Controls.Add(this.R_U_N);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.FactorEnd);
@@ -374,6 +424,10 @@ namespace EPA_PMF_AUTO
         private System.Windows.Forms.TextBox FactorEnd;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button R_U_N;
+        private System.Windows.Forms.Label ShowStatus;
+        private System.Windows.Forms.Timer GetEPAPMF;
+        private System.Windows.Forms.CheckBox Taged;
+        private System.Windows.Forms.CheckBox Geted;
     }
 }
 

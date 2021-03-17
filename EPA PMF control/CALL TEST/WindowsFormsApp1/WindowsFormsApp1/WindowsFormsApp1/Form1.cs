@@ -77,10 +77,7 @@ namespace WindowsFormsApp1
        IntPtr wParam,
        string IParam
        );
-        [DllImport("user32.dll")] [return: MarshalAs(UnmanagedType.Bool)] static extern bool GetWindowRect
-        (
-         IntPtr Handle,
-         ref RECT lpRect);
+
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {
