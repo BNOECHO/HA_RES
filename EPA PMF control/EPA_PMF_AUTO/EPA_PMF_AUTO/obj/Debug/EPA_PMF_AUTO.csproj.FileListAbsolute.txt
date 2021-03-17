@@ -8,3 +8,4 @@ C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PM
 C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Debug\EPA_PMF_AUTO.csproj.CoreCompileInputs.cache
 C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Debug\EPA_PMF_AUTO.exe
 C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Debug\EPA_PMF_AUTO.pdb
+C:\Users\XxBNOxX\source\repos\BNOECHO\HA_RES\EPA PMF control\EPA_PMF_AUTO\EPA_PMF_AUTO\obj\Debug\EPA_PMF_AUTO.csproj.ResolveComReference.cache
