@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using Excel= Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace EPA_PMF_AUTO
 {
@@ -69,6 +70,7 @@ namespace EPA_PMF_AUTO
         string CAT = "";
         double CATweak = 1;
         double CATbad = 0.5;
+        String CSV = "";
         Configuration Config = null;
         IntPtr EPA_PMF = new IntPtr(0);
         IntPtr EPA_PMF_TAB = new IntPtr(0);
@@ -344,7 +346,7 @@ namespace EPA_PMF_AUTO
         private void R_U_N_Click(object sender, EventArgs e)
         {
             MessageBox.Show("在開始執行之前，請先將EPA PMF 5.0 切換至\"model data->data files!\"");
-            
+            CSV += FactorBegin.Text + ",";
             GetEPAPMF.Enabled = false;
             string TempSaveFolderPath = Targetfolder.Text;
             Config.AppSettings.Settings["outFolder"].Value = TempSaveFolderPath + "\\" + SpawnTitle.Text;
@@ -382,6 +384,67 @@ namespace EPA_PMF_AUTO
             Config.AppSettings.Settings["outFolder"].Value=TempSaveFolderPath;
             Config.Save();
             GetEPAPMF.Enabled = true;
+            listView2.Clear();
+            listView2.Columns.Add("Factors");
+            ListViewItem Qitem = new ListViewItem("Q(true)/Qexp");
+            List<double> MAXQPs = new List<double>();
+            for (int i = Convert.ToInt32(FactorBegin.Text); i <= Convert.ToInt32(FactorEnd.Text); i++)
+            {
+                
+                Excel.Application excel = new Excel.Application();
+                Excel.Workbook workbookC = null;
+                object oMissing = System.Reflection.Missing.Value;
+                DataTable DT = new DataTable();
+                workbookC = excel.Workbooks.Open(Targetfolder.Text+"\\"+SpawnTitle.Text+"\\"+SpawnTitle.Text+"With"+i.ToString()+"Factors_diagnostics.xlsx", oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing);
+                Excel.Worksheet Q = (Excel.Worksheet)workbookC.Sheets["Base Runs"];
+                listView2.Columns.Add(i.ToString()+"Factors");
+                List<double> Qps = new List<double>();
+                foreach (Object value in (Q.Range[Q.Cells[10, 7], Q.Cells[10, 7].End[Excel.XlDirection.xlDown]].Value2()))
+                {
+                    if (value == null) break;
+                    Qps.Add((double)value);
+                }
+                MAXQPs.Add(Qps.Max());
+                Qitem.SubItems.Add(Qps.Max().ToString());
+                CSV += Qps.Max().ToString() + ",";
+
+
+                //EXCEL C Close
+                Marshal.ReleaseComObject(Q);
+                workbookC.Close();
+                Marshal.ReleaseComObject(workbookC);
+                excel.Workbooks.Close();
+                excel.Quit();
+                if (excel != null)
+                {
+                    int EXCproID = -1;
+                    GetWindowThreadProcessId(new IntPtr(excel.Hwnd), ref EXCproID);
+                    System.Diagnostics.Process EXprocess = System.Diagnostics.Process.GetProcessById(EXCproID);
+                    if (EXprocess != null)
+                    {
+                        EXprocess.Kill();
+                    }
+                }
+                Marshal.ReleaseComObject(excel);
+                GC.Collect();
+            }
+            listView2.Items.Add(Qitem);
+            List<double> DDMAXQps = new List<double>();
+            double Max = 0;
+            int MaxIndex = 0;
+            for (int i = 1; i < MAXQPs.Count() - 1; i++)
+            {
+                double T = MAXQPs[i - 1] - MAXQPs[i] * 2 + MAXQPs[i + 1];
+                if (Max > T) {
+                    MaxIndex = i;
+                    Max = T;
+                }
+
+            }
+            
+            label6.Text = "轉折點:" + (MaxIndex + Convert.ToInt32(FactorBegin.Text)).ToString() + "Factors";
+            SpawnCsv.Enabled = true;
+            if (Convert.ToInt32(FactorEnd.Text) - Convert.ToInt32(FactorBegin.Text) < 2) label6.Text= "轉折點:無法取得"; 
             MessageBox.Show("已完成!");
         }
 
@@ -423,40 +486,7 @@ namespace EPA_PMF_AUTO
             R_U_N.Enabled = Taged.Checked && Geted.Checked;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Switch_Tab1(0);
-        }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Switch_Tab1(1);
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            SetConfigPath(TBCFG.Text);
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            SetNumOfRun(Runtime.Text);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            Click_Load();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            Click_Run();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void BrowseFolder_Click(object sender, EventArgs e)
         {
@@ -466,5 +496,15 @@ namespace EPA_PMF_AUTO
             }
 
         }
+
+        private void SpawnCsv_Click(object sender, EventArgs e)
+        {
+            FileStream FS = File.Create( Targetfolder.Text+"\\"+SpawnTitle.Text+"\\Qres.csv");
+            StreamWriter SW = new StreamWriter(FS, Encoding.GetEncoding("big5"));
+            SW.Write(CSV);
+
+            SW.Close();
+        }
     }
 }
+

@@ -64,6 +64,9 @@ namespace EPA_PMF_AUTO
             this.Taged = new System.Windows.Forms.CheckBox();
             this.Geted = new System.Windows.Forms.CheckBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.SpawnCsv = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -306,7 +309,7 @@ namespace EPA_PMF_AUTO
             // R_U_N
             // 
             this.R_U_N.Enabled = false;
-            this.R_U_N.Location = new System.Drawing.Point(426, 267);
+            this.R_U_N.Location = new System.Drawing.Point(542, 263);
             this.R_U_N.Name = "R_U_N";
             this.R_U_N.Size = new System.Drawing.Size(109, 23);
             this.R_U_N.TabIndex = 30;
@@ -354,11 +357,44 @@ namespace EPA_PMF_AUTO
             this.Geted.UseVisualStyleBackColor = false;
             this.Geted.CheckedChanged += new System.EventHandler(this.Geted_CheckedChanged);
             // 
+            // listView2
+            // 
+            this.listView2.HideSelection = false;
+            this.listView2.Location = new System.Drawing.Point(369, 303);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(350, 78);
+            this.listView2.TabIndex = 34;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Details;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(369, 388);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 12);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "轉折點:";
+            // 
+            // SpawnCsv
+            // 
+            this.SpawnCsv.Enabled = false;
+            this.SpawnCsv.Location = new System.Drawing.Point(620, 383);
+            this.SpawnCsv.Name = "SpawnCsv";
+            this.SpawnCsv.Size = new System.Drawing.Size(99, 23);
+            this.SpawnCsv.TabIndex = 36;
+            this.SpawnCsv.Text = "產生CSV";
+            this.SpawnCsv.UseVisualStyleBackColor = true;
+            this.SpawnCsv.Click += new System.EventHandler(this.SpawnCsv_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(732, 486);
+            this.Controls.Add(this.SpawnCsv);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.listView2);
             this.Controls.Add(this.Geted);
             this.Controls.Add(this.Taged);
             this.Controls.Add(this.ShowStatus);
@@ -433,6 +469,9 @@ namespace EPA_PMF_AUTO
         private System.Windows.Forms.CheckBox Taged;
         private System.Windows.Forms.CheckBox Geted;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button SpawnCsv;
     }
 }
 
