@@ -441,8 +441,32 @@ namespace EPA_PMF_AUTO
                 }
 
             }
-            
-            label6.Text = "轉折點:" + (MaxIndex + Convert.ToInt32(FactorBegin.Text)).ToString() + "Factors";
+            int BestFactor = MaxIndex + Convert.ToInt32(FactorBegin.Text);
+            label6.Text = "轉折點:" + (BestFactor).ToString() + "Factors";
+            //再重新讀取一次最佳轉折點
+            Config.AppSettings.Settings["numBaseFactors"].Value = BestFactor.ToString();
+            Config.AppSettings.Settings["outFileQual"].Value = SpawnTitle.Text + "With" + BestFactor.ToString() + "Factors";
+            string Bestfactor_names = "Factor 1";
+            int BRT = Convert.ToInt32(Runtime.Text);
+            for (int i = 1; i <  BestFactor* BRT; i++) Bestfactor_names += "|Factor " + (i % BRT) + 1;
+            Config.AppSettings.Settings["factorNames"].Value = Bestfactor_names;
+            Config.Save();
+            //MessageBox.Show("Phase" + (Factor + 1 - Convert.ToInt32(FactorBegin.Text)).ToString() + "Start");
+            Switch_Tab1(0);//3
+            System.Threading.Thread.Sleep(100);
+            SetConfigPath(TBCFG.Text);//5
+            System.Threading.Thread.Sleep(100);
+            Click_Load();//7
+            System.Threading.Thread.Sleep(100);
+            Switch_Tab1(1);//4
+            System.Threading.Thread.Sleep(100);
+            SetConfigPath(TBCFG.Text);//5
+            System.Threading.Thread.Sleep(100);
+            Switch_Tab1(0);//3
+            System.Threading.Thread.Sleep(100);
+            Click_Run();//8
+            System.Threading.Thread.Sleep(100);
+            //END
             SpawnCsv.Enabled = true;
             if (Convert.ToInt32(FactorEnd.Text) - Convert.ToInt32(FactorBegin.Text) < 2) label6.Text= "轉折點:無法取得"; 
             MessageBox.Show("已完成!");
