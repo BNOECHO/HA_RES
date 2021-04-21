@@ -38,3 +38,17 @@ D:\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.csproj.CoreCompileInpu
 D:\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.csproj.CopyComplete
 D:\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.exe
 D:\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.pdb
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.csprojAssemblyReference.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.Form1.resources
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer_光化.Properties.Resources.resources
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.csproj.GenerateResource.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.csproj.CoreCompileInputs.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer_光化.exe
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer_光化.pdb
+C:\Users\BNO ECHO\Desktop\AAA\Transer_光化.exe.config
+C:\Users\BNO ECHO\Desktop\AAA\Transer_光化.exe
+C:\Users\BNO ECHO\Desktop\AAA\Transer_光化.pdb
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\Transer\obj\Debug\Transer.csproj.CopyComplete
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\debug\Transer_光化.exe.config
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\debug\Transer_光化.exe
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\Transer\Transer光化\debug\Transer_光化.pdb
