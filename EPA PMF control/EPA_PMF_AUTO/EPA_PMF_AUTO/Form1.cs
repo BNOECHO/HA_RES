@@ -345,6 +345,8 @@ namespace EPA_PMF_AUTO
 
         private void R_U_N_Click(object sender, EventArgs e)
         {
+            Config.AppSettings.Settings["categories"].Value = CAT;
+            Config.Save();
             MessageBox.Show("在開始執行之前，請先將EPA PMF 5.0 切換至\"model data->data files!\"");
             CSV += FactorBegin.Text + ",";
             GetEPAPMF.Enabled = false;

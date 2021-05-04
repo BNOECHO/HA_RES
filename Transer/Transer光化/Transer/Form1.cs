@@ -134,7 +134,7 @@ namespace Transer
                     for (int i = 0; i < 24; i++)
                     {
                         NewLine += station + ",";
-                        NewLine += Time + "," + i.ToString() + ",QA後";
+                        NewLine += Time + "," + i.ToString().PadLeft(2,'0') + ",QA後";
                         for (int o = 0; o < 56; o++) NewLine += "," + TDATA[station][Time][i][o];
                         NewLine += "\n";
                     }
