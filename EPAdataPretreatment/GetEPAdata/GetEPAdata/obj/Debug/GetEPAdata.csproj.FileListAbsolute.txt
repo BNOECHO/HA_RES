@@ -1,0 +1,9 @@
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\bin\Debug\GetEPAdata.dll
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\bin\Debug\GetEPAdata.pdb
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\bin\Debug\BNOECHO_CSV.dll
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\bin\Debug\BNOECHO_CSV.pdb
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\obj\Debug\GetEPAdata.csprojAssemblyReference.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\obj\Debug\GetEPAdata.csproj.CoreCompileInputs.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\obj\Debug\GetEPAdata.csproj.CopyComplete
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\obj\Debug\GetEPAdata.dll
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\GetEPAdata\GetEPAdata\obj\Debug\GetEPAdata.pdb

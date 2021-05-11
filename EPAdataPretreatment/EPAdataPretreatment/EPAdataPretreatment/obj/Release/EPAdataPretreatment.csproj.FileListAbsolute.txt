@@ -1,0 +1,9 @@
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Release\EPAdataPretreatment.exe.config
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Release\EPAdataPretreatment.exe
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Release\EPAdataPretreatment.pdb
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Release\EPAdataPretreatment.Form1.resources
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Release\EPAdataPretreatment.Properties.Resources.resources
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Release\EPAdataPretreatment.csproj.GenerateResource.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Release\EPAdataPretreatment.csproj.CoreCompileInputs.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Release\EPAdataPretreatment.exe
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Release\EPAdataPretreatment.pdb
