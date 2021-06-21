@@ -28,7 +28,7 @@ namespace GetEPAdata
                 foreach (List<string> ROW in data.table)
                 {
                     string site = ROW[1];
-                    string date = ROW[5].Split('-')[1] + "/" + ROW[5].Split('-')[2] + "/" + ROW[5].Split('-')[0];
+                    string date = ROW[5].Split('-')[1].PadLeft(2,'0') + "/" + ROW[5].Split('-')[2].PadLeft(2, '0') + "/" + ROW[5].Split('-')[0];
                     DataDictionExpand(site,date);
                     double d;
                     for (int i = 0; i < 24; i++)if(double.TryParse(ROW[6 + i], out d))dataDict[site][date + " " + i.ToString().PadLeft(2, '0') + ":00"][Convert.ToInt32(ROW[2])] = ROW[6 + i];
@@ -66,9 +66,7 @@ namespace GetEPAdata
             Result.AddRow(header);
             foreach (string TimeTag in dataDict[site].Keys)
             {
-                bool notnull = false;
-                for (int i = 1; i < dataDict[site][TimeTag].Count(); i++) if (dataDict[site][TimeTag][i] != "") notnull = true;//REMOVE ALL NULL
-                if(notnull)Result.AddRow(dataDict[site][TimeTag]);
+                Result.AddRow(dataDict[site][TimeTag]);
             }
             foreach (string Key in C.Keys)
             {

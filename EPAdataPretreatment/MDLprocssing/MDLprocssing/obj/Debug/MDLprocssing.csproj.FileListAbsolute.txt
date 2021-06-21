@@ -1,0 +1,9 @@
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\bin\Debug\MDLprocssing.dll
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\bin\Debug\MDLprocssing.pdb
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\bin\Debug\BNOECHO_CSV.dll
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\bin\Debug\BNOECHO_CSV.pdb
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\obj\Debug\MDLprocssing.csprojAssemblyReference.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\obj\Debug\MDLprocssing.csproj.CoreCompileInputs.cache
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\obj\Debug\MDLprocssing.csproj.CopyComplete
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\obj\Debug\MDLprocssing.dll
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\MDLprocssing\MDLprocssing\obj\Debug\MDLprocssing.pdb

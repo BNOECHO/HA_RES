@@ -12,6 +12,7 @@ using GetEPAdata;
 using BNOECHO_CSV;
 using System.Configuration;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Windows;
 
 namespace EPAdataPretreatment.Forms
 {
@@ -38,6 +39,7 @@ namespace EPAdataPretreatment.Forms
             label7.BackColor = Color.FromArgb(26, 125, 216);
             Phase1.RunWorkerAsync();
             panel2.Visible = false;
+            pictureBox1.Visible = true;
 
             
         }
@@ -114,6 +116,7 @@ namespace EPAdataPretreatment.Forms
             comboBox1.Items.Clear();
             foreach (string s in listBox1.Items) comboBox1.Items.Add(s);
             panel1.Visible = true;
+            pictureBox1.Visible = false;
             button6.Enabled = false;
 
         }
@@ -164,7 +167,11 @@ namespace EPAdataPretreatment.Forms
 
         private void button5_Click(object sender, EventArgs e)
         {
+            OWNER.UnLock();
+
             this.Close();
+            
+            
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -180,20 +187,25 @@ namespace EPAdataPretreatment.Forms
                 config.AppSettings.Settings["SavePath"].Value = COFD.FileName;
                 config.Save(ConfigurationSaveMode.Modified);
                 ConfigurationManager.RefreshSection("appSettings");
-                foreach (string site in listBox2.Items) EPAdataBase.ExportSitePpbcToUgm3(site).SaveCSV(COFD.FileName + "\\" + dateTimePicker1.Value.Year.ToString() + dateTimePicker1.Value.Month.ToString().PadLeft(2, '0') + "_" + dateTimePicker1.Value.Year.ToString() + dateTimePicker1.Value.Month.ToString().PadLeft(2, '0') + "_" + site);
+                foreach (string site in listBox2.Items) EPAdataBase.ExportSitePpbcToUgm3(site).SaveCSV(COFD.FileName + "\\" + dateTimePicker1.Value.Year.ToString() + dateTimePicker1.Value.Month.ToString().PadLeft(2, '0') + "_" + dateTimePicker2.Value.Year.ToString() + dateTimePicker2.Value.Month.ToString().PadLeft(2, '0') + "_" + site+".csv");
 
 
-                
-
-            }
-
-
-
-
-            if (listBox2.Items.Count == 1)
-            { 
+                MessageBox.Show("輸出已完成");           
+                if (listBox2.Items.Count == 1)
+                { 
                 //接續到MDL
+                }
+                foreach (string s in listBox2.Items) listBox1.Items.Add(s);
+                listBox2.Items.Clear();
+                comboBox1.Items.Clear();
+                foreach (String s in listBox1.Items) comboBox1.Items.Add(s);
+
             }
+
+
+
+
+
 
         }
     }

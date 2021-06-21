@@ -16,11 +16,6 @@ C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatmen
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Debug\EPAdataPretreatment.Forms.FormSettings.resources
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Debug\EPAdataPretreatment.MAIN.resources
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Debug\EPAdataPretreatment.Forms.FormGetEPAData.resources
-C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\Interop.WMPLib.dll
-C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\AxInterop.WMPLib.dll
-C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Debug\Interop.WMPLib.dll
-C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Debug\AxInterop.WMPLib.dll
-C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\obj\Debug\EPAdataPretreatment.csproj.ResolveComReference.cache
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\Microsoft.WindowsAPICodePack.dll
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
@@ -30,3 +25,5 @@ C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatmen
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.pdb
 C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.xml
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\MDLprocssing.dll
+C:\Users\BNO ECHO\Documents\GitHub\HA_RES\EPAdataPretreatment\EPAdataPretreatment\EPAdataPretreatment\bin\Debug\MDLprocssing.pdb
